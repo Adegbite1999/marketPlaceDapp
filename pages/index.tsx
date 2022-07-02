@@ -25,7 +25,7 @@ const Home: NextPage = () => {
               <h2>My NFT</h2>
               <p>My nft pratice code</p>
               <p>1.00 ETH</p>
-              <button className="bg-purple-500 outline-none  text-white w-full">Buy NFT</button>
+              <button className="bg-purple-500 outline-none  rounded-sm text-white w-full">Buy NFT</button>
             </div>
             <div className="border-2 rounded-lg border-purple-500 p-2">
               <div>
@@ -34,7 +34,7 @@ const Home: NextPage = () => {
               <h2>My NFT</h2>
               <p>My nft pratice code</p>
               <p>1.00 ETH</p>
-              <button className="bg-purple-500 outline-none  text-white w-full">Buy NFT</button>
+              <button className="bg-purple-500 outline-none  rounded-sm text-white w-full">Buy NFT</button>
             </div>
             <div className="border-2 rounded-lg border-purple-500 p-2">
               <div>
