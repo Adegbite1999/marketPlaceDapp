@@ -5,9 +5,9 @@ const contextDefaultValue : NFTContextState = {
     connected: false,
     account:"",
     metamaskPresent:false,
-    setAccount: () => {},
-    setConnected: () => {},
-    setMetamaskPresent:() => {}
+    setAccount: () => null,
+    setConnected: () => null,
+    setMetamaskPresent:() => null
 }
 
 type NFTContextProviderProps = {
@@ -18,11 +18,12 @@ export const NFTContext = React.createContext<NFTContextState>(contextDefaultVal
 
 
 
+
 export const NFTContextProvider = ({children}:NFTContextProviderProps) =>{
 
-    const [connected, setConnected] = useState(contextDefaultValue.connected)
-    const [account, setAccount] = useState(contextDefaultValue.account)
-    const [metamaskPresent,setMetamaskPresent] = useState(contextDefaultValue.metamaskPresent)
+    const [connected, setConnected] = useState(false)
+    const [account, setAccount] = useState("")
+    const [metamaskPresent,setMetamaskPresent] = useState(false)
 
 
 

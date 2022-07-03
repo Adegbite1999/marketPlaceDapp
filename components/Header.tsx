@@ -3,6 +3,8 @@ import { useNFTContext } from "../context/state";
 import { navLink } from "../static/data";
 import { addressShortner } from "../web3/helpers";
 import web3Connector from "../web3/walletConnect";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 declare let window: any;
 function Header() {
   const {
@@ -31,8 +33,9 @@ function Header() {
   }, [eagerConnect, handleAccountChanged, handleChainChanged]);
 
   return (
-    // <header>
+    // <header> 
     <nav className="bg-purple-500 flex justify-between p-4">
+            <ToastContainer />
       <ul className="flex space-x-12 items-center">
         {navLink.map((nav, idx) => {
           return (

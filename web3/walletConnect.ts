@@ -5,12 +5,6 @@ import { ethers } from "ethers";
 import {toast} from "react-toastify";
 
 
-interface RequestArguments{
-  methods:string,
-  params?:unknown[] | object
-}
-
-
 export default function web3Connector (){ 
   const {setConnected, setAccount} = useNFTContext()
   const connectWallet = async () => {
