@@ -1,4 +1,4 @@
-export const addressShortner = (address:string, shorter:string) => {
+export const addressShortner = (address:string, shorter:any) => {
     if (shorter)
       return `${address.slice(0, 5)}...${address.slice(
         address.length - 4,

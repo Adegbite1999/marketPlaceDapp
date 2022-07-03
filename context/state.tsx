@@ -5,6 +5,9 @@ const contextDefaultValue : NFTContextState = {
     connected: false,
     account:"",
     metamaskPresent:false,
+    setAccount: () => {},
+    setConnected: () => {},
+    setMetamaskPresent:() => {}
 }
 
 type NFTContextProviderProps = {

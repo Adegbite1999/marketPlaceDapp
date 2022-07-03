@@ -3,27 +3,19 @@ import { useNFTContext } from "../context/state";
 import { ethers } from "ethers";
 // import { useToasts } from 'react-toast-notifications';
 import {toast} from "react-toastify";
-import { MetaMaskInpageProvider } from "@metamask/providers";
 
-declare global {
-    interface Window{
-        ethereum?:MetaMaskInpageProvider
-    }
+
+interface RequestArguments{
+  methods:string,
+  params?:unknown[] | object
 }
 
 
-
-
-
-export default function web3Connector (){
-
-  // const {addToast} = useToasts()
-  
- 
-//   const {setConnected, setAccount} = useNFTContext()
+export default function web3Connector (){ 
+  const {setConnected, setAccount} = useNFTContext()
   const connectWallet = async () => {
-    if (!!window.ethereum || !!window.web3) {
-      await window.ethereum.request({ method: "eth_requestAccounts" });
+    if (!!(window as any).ethereum || !! (window as any).web3) {
+      await (window as any).ethereum.request({ method: "eth_requestAccounts" });
       eagerConnect();
       toast.success('wallet connected successfully', );
 
@@ -39,7 +31,7 @@ export default function web3Connector (){
   // }
 
   
-  const disconnectWallet = async =>{
+  const disconnectWallet = async(): Promise<any> => {
     setAccount("")
     setConnected(false)
     localStorage.removeItem("address");
@@ -47,19 +39,19 @@ export default function web3Connector (){
   }
 
   const eagerConnect = useCallback(async () =>{
-    const networkId = await window.ethereum.request({method:"eth_chainId"})
-    if(Number(networkId) !== 80001) return
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const networkId = await (window as any).ethereum.request({method:"eth_chainId"})
+    if(Number(networkId) !== 80001) return;
+    const provider = new ethers.providers.Web3Provider((window as any).ethereum);
     const accounts = await provider.listAccounts();
-    if(!accounts.length) return
+    if(!accounts.length) return;
     setAccount(accounts[0])
     localStorage.setItem("address", accounts[0]);
       setConnected(true)
   },[])
 
-  const handleAccountChanged = useCallback(async (accounts) => {
+  const handleAccountChanged = useCallback(async (accounts:string):Promise<any> => {
     if (!!accounts.length) {
-      const networkId = await window.ethereum.request({
+      const networkId = await (window as any).ethereum.request({
         method: "eth_chainId",
       });
       if (Number(networkId) !== 80001) return;
@@ -79,7 +71,7 @@ export default function web3Connector (){
 
 
   
-  const handleChainChanged = useCallback(async (chainid) => {
+  const handleChainChanged = useCallback(async (chainid:number) => {
     if (Number(chainid) !== 80001) {
       setConnected(false);
       setAccount("");
@@ -88,7 +80,7 @@ export default function web3Connector (){
         "You are connected to the wrong network, please switch to polygon mumbai"
       );
     } else {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const provider = new ethers.providers.Web3Provider((window as any).ethereum);
       const accounts = await provider.listAccounts();
       if (!accounts.length) return;
       setAccount(accounts[0]);
