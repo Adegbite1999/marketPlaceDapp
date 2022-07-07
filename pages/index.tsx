@@ -13,6 +13,10 @@ const {connected} = useNFTContext()
  useEffect(() => {
  loadNfts()
  },[])
+ 
+ if(!connected) return(
+  <p>Connect wallet to access Dapp</p>
+ )
 
  if(isLoading === true && !nfts.length) return(
   <h1>No item in marketPlace</h1>
@@ -33,7 +37,7 @@ const {connected} = useNFTContext()
                 return (
                   <div key={i} className="border-2 rounded-lg border-purple-500 p-2">
               <div>
-                <Image src={item.image} alt="image" />
+                <img src={item.image} alt="image"  />
               </div>
               <h2>{item.name}</h2>
               <p>{item.description}</p>

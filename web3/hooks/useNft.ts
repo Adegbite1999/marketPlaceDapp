@@ -30,11 +30,7 @@ const init = useCallback(() =>{
  contract.current =   getNft(nftAddress, signer.current || provider.current)
 },[])
 
-console.log('contract', contract.current)
-
-const helo = () =>{
-    return console.log('HEllo')
-}
+// const create
 
 return{
 // helo

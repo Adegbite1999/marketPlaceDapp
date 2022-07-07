@@ -13,6 +13,7 @@ const useMarket = () => {
   const signer: any = useRef();
   const provider: any = useRef();
   const contract: any = useRef();
+  const nft:any = useRef();
 
   const { connected } = useNFTContext();
   const [nfts, setNFTs] = useState<Array<any>>([]);
@@ -30,9 +31,14 @@ const useMarket = () => {
     init();
   }, [connected]);
 
+
   const init = useCallback(() => {
     contract.current = getMarketPlace(
       marketPlace,
+      signer.current || provider.current
+    );
+    nft.current = getNft(
+      nftAddress,
       signer.current || provider.current
     );
   }, []);
@@ -49,7 +55,7 @@ const useMarket = () => {
     const data = await marketContract.fetchMarketItems();
     const items = await Promise.all(
       data?.map(async (item: any) => {
-        const tokenUri = await tokenContract.tokenUri(item.tokenId);
+        const tokenUri = await tokenContract.tokenURI(item.tokenId);
         const meta = await axios.get(tokenUri);
         let price = ethers.utils.formatUnits(item.price.toString(), "ether");
         let itemData = {
@@ -79,11 +85,36 @@ const useMarket = () => {
 
   },[])
 
+
+  // const createSales = useCallback(async(url:any, callback:any) =>{
+  //   try {
+  //    await contract.current.createToken(url)
+  //       .then(callback)
+  //       .catch(callback)
+     
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // },[])
+
+  // const price = useCallback(async(callback:any) =>{
+  //   try {
+  //    await nft.current.listingPrice()
+  //       .then(callback)
+  //       .catch(callback)
+     
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // },[])
+
   return {
     loadNfts,
     nfts,
     isLoading,
-    buyNFT
+    buyNFT,
+    // createSales,
+    // price
   };
 };
 
