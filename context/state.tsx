@@ -24,6 +24,8 @@ export const NFTContextProvider = ({children}:NFTContextProviderProps) =>{
     const [connected, setConnected] = useState(false)
     const [account, setAccount] = useState("")
     const [metamaskPresent,setMetamaskPresent] = useState(false)
+    const [nfts, setNfts] = useState<Array<object>>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
 
 
@@ -32,9 +34,14 @@ export const NFTContextProvider = ({children}:NFTContextProviderProps) =>{
     connected,
     account,
     metamaskPresent,
+    nfts,
+    isLoading,
+    setNfts,
+    setIsLoading,
     setConnected,
     setAccount,
     setMetamaskPresent
+
     }
 return (
     <NFTContext.Provider value={state}>

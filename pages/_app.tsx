@@ -1,17 +1,16 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import LayOut from '../layout';
-import {NFTContextProvider} from "../context/state";
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import LayOut from "../layout";
+import { NFTContextProvider } from "../context/state";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  
   return (
-    <LayOut>
-      <NFTContextProvider>
-      <Component {...pageProps} />
-      </NFTContextProvider>
-    </LayOut>
-  )
+    <NFTContextProvider>
+      <LayOut>
+        <Component {...pageProps} />
+      </LayOut>
+    </NFTContextProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
